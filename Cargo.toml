@@ -32,7 +32,7 @@ rand = "0.7"
 scoped-pool = { version = "1.0.1", git = "https://github.com/Acqueonlabs/rust-scoped-pool.git", branch = "master" } 
 lazy_static = "1.4"
 error-chain = "0.12"
-parking_lot = "0.9"
+parking_lot = "0.12"
 pwhash = "0.3"
 serde = { version = "1.0", features = ["derive"], optional = true }
 
