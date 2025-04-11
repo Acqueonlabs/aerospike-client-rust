@@ -38,6 +38,9 @@ pub struct QueryPolicy {
 
     /// Optional Filter Expression
     pub filter_expression: Option<FilterExpression>,
+
+    /// Optional Short Query
+    pub short_query: bool,
 }
 
 impl QueryPolicy {
@@ -50,6 +53,11 @@ impl QueryPolicy {
     pub const fn filter_expression(&self) -> &Option<FilterExpression> {
         &self.filter_expression
     }
+
+    /// Get the short query value
+    pub const fn short_query(&self) -> &bool {
+        &self.short_query
+    }
 }
 
 impl Default for QueryPolicy {
@@ -60,6 +68,7 @@ impl Default for QueryPolicy {
             record_queue_size: 1024,
             fail_on_cluster_change: true,
             filter_expression: None,
+            short_query: false,
         }
     }
 }

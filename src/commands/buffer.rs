@@ -44,6 +44,9 @@ const INFO1_NOBINDATA: u8 = 1 << 5;
 // Involve all replicas in read operation.
 const INFO1_CONSISTENCY_ALL: u8 = 1 << 6;
 
+// Run a query as short query
+const INFO1_SHORT_QUERY: u8 = 1 << 2;
+
 // Create or update record
 const INFO2_WRITE: u8 = 1;
 
@@ -816,12 +819,16 @@ impl Buffer {
             }
         }
 
-        let info1 = if statement.bins.is_none() {
+        let mut info1 = if statement.bins.is_none() {
             INFO1_READ | INFO1_NOBINDATA
         } else {
             INFO1_READ
         };
         let info2 = if write { INFO2_WRITE } else { 0 };
+
+        if policy.short_query {
+            info1 |= INFO1_SHORT_QUERY;
+        }
 
         self.write_header(
             &policy.base_policy,
